@@ -139,7 +139,7 @@ color = "#06d6a0" if total >= 0 else "#ef476f"
 r1, r2, r3 = st.columns([1, 2, 1])
 with r2:
     st.markdown(f"""
-    <div style='background:#161927; border:2px solid {color}; border-radius:14px; padding:24px; text-align:center;'>
+    <div style='background:#161927; border:2px solid {color}; border-radius:14px; padding:24px; text-align:center; margin:0.6rem 0 1.4rem 0;'>
         <p style='color:#9aa0b4; font-size:0.85rem; margin:0 0 6px 0; text-transform:uppercase; letter-spacing:0.08em;'>
             Monthly Net Profit (exact)</p>
         <h1 style='color:{color}; font-size:2.6rem; margin:0; font-weight:800;'>${total:,.0f}</h1>
@@ -147,7 +147,6 @@ with r2:
             {total_orders:,} orders · ${total / total_orders if total_orders else 0:,.2f} profit per order</p>
     </div>""", unsafe_allow_html=True)
 
-st.markdown("<div style='margin-top:1rem;'></div>", unsafe_allow_html=True)
 st.dataframe(calc.style.format({"Orders": "{:,.0f}", "Revenue": "${:,.0f}", "Net Profit": "${:,.0f}",
                                 "Margin (%)": "{:.1f}%", "Profit / Order": "${:,.2f}"}),
              width="stretch", hide_index=True)
