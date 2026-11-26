@@ -42,7 +42,7 @@ from app.utils.plot_utils import kpi_card, section_header
 k1,k2,k3,k4,k5 = st.columns(5)
 with k1: kpi_card("Total Revenue",    f"${fdf['TotalRevenue'].sum():,.0f}", "↑ Gross", "positive")
 with k2: kpi_card("Total Net Profit", f"${fdf['TotalNetProfit'].sum():,.0f}", "↑ After costs", "positive")
-with k3: kpi_card("Avg Profit Margin",f"{fdf['ProfitMargin'].mean():.1f}%", "Portfolio avg", "neutral")
+with k3: kpi_card("Profit Margin",    f"{fdf['TotalNetProfit'].sum()/fdf['TotalRevenue'].sum()*100:.1f}%", "Profit ÷ revenue", "neutral")
 with k4: kpi_card("Avg Order Value",  f"${fdf['AOV'].mean():.2f}", "Per transaction", "info")
 with k5: kpi_card("Total Restaurants",f"{fdf['RestaurantID'].nunique():,}", "In selection", "info")
 
@@ -143,7 +143,7 @@ with col5:
 with col6:
     fig, ax = plt.subplots(figsize=(7, 4))
     sns.scatterplot(data=fdf, x="AOV", y="TotalNetProfit", hue="CuisineType",
-                    palette=PALETTE, ax=ax, alpha=0.7, s=60)
+                    palette="tab10", ax=ax, alpha=0.7, s=60)
     ax.set_xlabel("Average Order Value ($)")
     ax.set_ylabel("Total Net Profit ($)")
     ax.set_title("AOV vs Net Profit by Cuisine")
