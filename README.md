@@ -73,7 +73,10 @@ streamlit run app/main.py
 
 ## Research paper
 
-I authored a research paper on this project (JETIR paper ID 583938, accepted, not published). A revised version will be added to this repository.
+I authored a research paper on this project (JETIR paper ID 583938, accepted, not published).
+
+- [Research paper (revised, November 2026)](docs/Research_Paper_Revised.pdf). It corrects the version submitted to JETIR: the 45.4% uplift and the R² ≈ 0.96–0.97 model scores are withdrawn, and the channel margins and order shares are corrected.
+- [Executive summary (revised, November 2026)](docs/Executive_Summary_Revised.pdf)
 
 ## How I built it
 
