@@ -25,19 +25,19 @@ render_header()
 # ── KPI Row ───────────────────────────────────────────────────────────────
 c1,c2,c3,c4,c5,c6 = st.columns(6)
 with c1: kpi_card("Restaurants",     f"{fdf['RestaurantID'].nunique():,}", "In selection", "info")
-with c2: kpi_card("Monthly Orders",  f"{fdf['MonthlyOrders'].sum():,.0f}", "Across all channels", "info")
+with c2: kpi_card("Monthly Orders",  f"{fdf['MonthlyOrders'].sum()/1e6:,.2f}M" if fdf['MonthlyOrders'].sum() >= 1e6 else f"{fdf['MonthlyOrders'].sum():,.0f}", "Across all channels", "info")
 with c3: kpi_card("Total Revenue",   f"${fdf['TotalRevenue'].sum()/1e6:,.1f}M", "↑ Gross revenue", "positive")
 with c4: kpi_card("Net Profit",      f"${fdf['TotalNetProfit'].sum()/1e6:,.2f}M", "↑ After all costs", "positive")
-with c5: kpi_card("Avg Margin",      f"{fdf['ProfitMargin'].mean():.1f}%", "Portfolio average", "neutral")
+with c5: kpi_card("Profit Margin",   f"{fdf['TotalNetProfit'].sum()/fdf['TotalRevenue'].sum()*100:.1f}%", "Profit ÷ revenue", "neutral")
 with c6: kpi_card("Avg Order Value", f"${fdf['AOV'].mean():.2f}", "Per transaction", "info")
 
 # ── Channel Snapshot ──────────────────────────────────────────────────────
 section_header("Channel Performance Snapshot")
 d1,d2,d3,d4 = st.columns(4)
-with d1: kpi_card("In-Store Profit",      f"${fdf['InStoreNetProfit'].sum():,.0f}", "🏠 Highest control", "positive")
-with d2: kpi_card("Uber Eats Profit",     f"${fdf['UberEatsNetProfit'].sum():,.0f}", "🟢 High commission", "neutral")
-with d3: kpi_card("DoorDash Profit",      f"${fdf['DoorDashNetProfit'].sum():,.0f}", "🔴 Smallest share", "neutral")
-with d4: kpi_card("Self-Delivery Profit", f"${fdf['SelfDeliveryNetProfit'].sum():,.0f}", "🚗 Best margin", "positive")
+with d1: kpi_card("In-Store Profit",      f"${fdf['InStoreNetProfit'].sum():,.0f}", "Best margin per order", "positive")
+with d2: kpi_card("Uber Eats Profit",     f"${fdf['UberEatsNetProfit'].sum():,.0f}", "Commission eats margin", "negative")
+with d3: kpi_card("DoorDash Profit",      f"${fdf['DoorDashNetProfit'].sum():,.0f}", "Commission eats margin", "negative")
+with d4: kpi_card("Self-Delivery Profit", f"${fdf['SelfDeliveryNetProfit'].sum():,.0f}", "No commission, own delivery cost", "positive")
 
 # ── Top 10 Table ──────────────────────────────────────────────────────────
 section_header("Top 10 Restaurants by Net Profit")
@@ -51,4 +51,7 @@ top10["TotalRevenue"]   = top10["TotalRevenue"].map("${:,.0f}".format)
 top10["TotalNetProfit"] = top10["TotalNetProfit"].map("${:,.0f}".format)
 top10["ProfitMargin"]   = top10["ProfitMargin"].map("{:.1f}%".format)
 top10["MonthlyOrders"]  = top10["MonthlyOrders"].map("{:,.0f}".format)
-st.dataframe(top10, use_container_width=True, hide_index=True)
+top10 = top10.rename(columns={"RestaurantName": "Restaurant", "CuisineType": "Cuisine",
+                              "TotalRevenue": "Revenue", "TotalNetProfit": "Net Profit",
+                              "ProfitMargin": "Margin", "MonthlyOrders": "Orders"})
+st.dataframe(top10, width="stretch", hide_index=True)

@@ -114,7 +114,7 @@ def render_header():
         st.image(LOGO_PATH, width=130)
     with col_title:
         st.markdown("""
-        <div style= 'padding-top: 10px;'padding-bottom: 6px;'>
+        <div style='padding-top: 10px; padding-bottom: 6px;'>
             <h1 style='font-size:1.9rem; color:#ffffff; margin:0; font-weight:700; line-height:1.3;'>
                 SkyCity Auckland
             </h1>
@@ -129,7 +129,7 @@ def render_sidebar_filters(df, get_cuisines, get_segments, get_subregions):
     with st.sidebar:
         col1, col2, col3 = st.columns([1, 5, 1])
         with col2:
-            st.image(LOGO_PATH, use_container_width=True)
+            st.image(LOGO_PATH, width="stretch")
 
         st.markdown("---")
         st.markdown("""
@@ -169,9 +169,9 @@ def render_sidebar_filters(df, get_cuisines, get_segments, get_subregions):
 
         st.page_link("main.py",                     label="Home",              icon=":material/home:")
         st.page_link("pages/1_Overview.py",         label="Overview",          icon=":material/bar_chart:")
-        st.page_link("pages/2_Profit_Predictor.py", label="Profit Predictor",  icon=":material/model_training:")
+        st.page_link("pages/2_Profit_Calculator.py", label="Profit Calculator", icon=":material/calculate:")
         st.page_link("pages/3_WhatIf_Simulator.py", label="What-If Simulator", icon=":material/tune:")
-        st.page_link("pages/4_Optimization.py",     label="Optimization",      icon=":material/target:")
+        st.page_link("pages/4_Channel_Shift.py",    label="Channel Shift",     icon=":material/swap_horiz:")
         st.page_link("pages/5_Sensitivity.py",      label="Sensitivity",       icon=":material/show_chart:")
         st.markdown("---")
         st.markdown("### Filters")
