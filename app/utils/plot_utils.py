@@ -19,7 +19,11 @@ DARK_CSS = """
 
     .block-container { padding-top: 1.2rem; padding-bottom: 2rem; max-width: 1300px; }
 
-     [data-testid="stVerticalBlock"] { gap: 0.6rem !important; }
+    [data-testid="stVerticalBlock"] { gap: 1rem !important; }
+    /* breathing room so cards, charts and tables never touch */
+    [data-testid="stDataFrame"] { margin-top: 0.4rem; margin-bottom: 0.4rem; }
+    [data-testid="stImage"], [data-testid="stPyplot"] { margin-bottom: 0.4rem; }
+    [data-testid="stCaptionContainer"] { margin-top: 0.3rem; }
     
     [data-testid="stPageLink"] { border-radius: 8px; padding: 2px 4px; margin-bottom: 2px; }
     [data-testid="stPageLink"]:hover { background-color: #242838; }
@@ -40,6 +44,7 @@ DARK_CSS = """
         border-radius: 10px;
         padding: 16px 18px;
         height: 100%;
+        margin-bottom: 0.9rem;
     }
     .kpi-label {
         font-size: 0.72rem;
@@ -81,6 +86,7 @@ DARK_CSS = """
         border: 1px solid #2a2d3e;
         border-radius: 10px;
         padding: 14px 16px 6px 16px;
+        margin-bottom: 0.9rem;
     }
 
     /* ── Insight Cards ─────────────────────────────────────────── */
